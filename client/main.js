@@ -403,8 +403,12 @@ class GameManager {
     this.lastFrameTime = currentTime;
 
     // Update local player
-    if (this.localPlayer && this.localPlayer.isAlive) {
-      this.localPlayer.update(deltaTime);
+    if (this.localPlayer) {
+      if (this.localPlayer.isAlive) {
+        this.localPlayer.update(deltaTime);
+      }
+    } else {
+      console.warn('[Game Loop] No local player!');
     }
 
     // Update weapon manager
