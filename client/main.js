@@ -241,6 +241,8 @@ class GameManager {
 
     // Initialize game components
     this.localPlayer = new LocalPlayer(this.camera, socketHandler.getLocalPlayerId());
+    console.log('[Game] Local player created:', this.localPlayer);
+
     this.otherPlayers = new OtherPlayersManager(this.scene);
     this.weaponManager = new WeaponManager(this.scene, this.camera, socketHandler, this.localPlayer);
     this.uiManager = new UIManager(this.localPlayer);
@@ -251,6 +253,7 @@ class GameManager {
 
     // Setup input handlers
     this.setupInputHandlers();
+    console.log('[Game] Input handlers set up');
 
     // Request pointer lock
     this.requestPointerLock();
@@ -258,11 +261,12 @@ class GameManager {
     // Start game loop
     this.lastFrameTime = performance.now();
     this.gameLoop();
+    console.log('[Game] Game loop started');
 
     // Notify server that game started
     socketHandler.notifyGameStarted(this.currentRoomCode);
 
-    console.log('[Game] Game started');
+    console.log('[Game] Game started, waiting for spawn...');
   }
 
   /**
