@@ -260,12 +260,18 @@ export class OtherPlayersManager {
     }
 
     // Update opacity based on spawn protection
-    if (player.mesh && playerData.spawnProtection) {
-      player.mesh.material.opacity = 0.5;
-      player.mesh.material.transparent = true;
-    } else if (player.mesh) {
-      player.mesh.material.opacity = 1.0;
-      player.mesh.material.transparent = false;
+    if (player.body && player.head) {
+      if (playerData.spawnProtection) {
+        player.body.material.opacity = 0.5;
+        player.body.material.transparent = true;
+        player.head.material.opacity = 0.5;
+        player.head.material.transparent = true;
+      } else {
+        player.body.material.opacity = 1.0;
+        player.body.material.transparent = false;
+        player.head.material.opacity = 1.0;
+        player.head.material.transparent = false;
+      }
     }
   }
 
