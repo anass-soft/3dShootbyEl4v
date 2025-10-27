@@ -202,6 +202,7 @@ export class LocalPlayer {
    * @param {object} position - Spawn position
    */
   spawn(position) {
+    console.log('[LocalPlayer] Spawning at position:', position);
     this.position = { ...position };
     this.velocity = { x: 0, y: 0, z: 0 };
     this.hp = 100;
@@ -210,6 +211,7 @@ export class LocalPlayer {
     this.isGrounded = true;
     this.weapon = 'ak47';
     this.updateCamera();
+    console.log('[LocalPlayer] Spawn complete, isAlive:', this.isAlive);
   }
 
   /**
