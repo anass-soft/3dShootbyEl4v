@@ -314,6 +314,8 @@ class GameManager {
    * @param {KeyboardEvent} e - Keyboard event
    */
   handleKeyDown(e) {
+    console.log('[Input] Key pressed:', e.code, 'isGameActive:', this.isGameActive, 'hasLocalPlayer:', !!this.localPlayer);
+
     if (!this.localPlayer || !this.isGameActive) {
       console.log('[Input] Key pressed but game not active or no local player');
       return;
@@ -322,10 +324,22 @@ class GameManager {
     this.keys[e.code] = true;
 
     // Movement keys
-    if (e.code === 'KeyW') this.localPlayer.inputState.forward = true;
-    if (e.code === 'KeyS') this.localPlayer.inputState.backward = true;
-    if (e.code === 'KeyA') this.localPlayer.inputState.left = true;
-    if (e.code === 'KeyD') this.localPlayer.inputState.right = true;
+    if (e.code === 'KeyW') {
+      this.localPlayer.inputState.forward = true;
+      console.log('[Input] W pressed - forward = true');
+    }
+    if (e.code === 'KeyS') {
+      this.localPlayer.inputState.backward = true;
+      console.log('[Input] S pressed - backward = true');
+    }
+    if (e.code === 'KeyA') {
+      this.localPlayer.inputState.left = true;
+      console.log('[Input] A pressed - left = true');
+    }
+    if (e.code === 'KeyD') {
+      this.localPlayer.inputState.right = true;
+      console.log('[Input] D pressed - right = true');
+    }
 
     // Jump
     if (e.code === 'Space') {
