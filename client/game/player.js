@@ -55,6 +55,7 @@ export class LocalPlayer {
    */
   update(deltaTime) {
     if (!this.isAlive) {
+      console.warn('[LocalPlayer] Update called but player is not alive');
       return;
     }
 
@@ -69,6 +70,14 @@ export class LocalPlayer {
     if (this.inputState.backward) moveZ += 1;
     if (this.inputState.left) moveX -= 1;
     if (this.inputState.right) moveX += 1;
+
+    // Debug: Log if any input is active (only once per second to avoid spam)
+    if (!this._lastInputLog || Date.now() - this._lastInputLog > 1000) {
+      if (moveX !== 0 || moveZ !== 0) {
+        console.log('[LocalPlayer] Movement input active:', this.inputState);
+        this._lastInputLog = Date.now();
+      }
+    }
 
     // Normalize diagonal movement
     if (moveX !== 0 && moveZ !== 0) {
