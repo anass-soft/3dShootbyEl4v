@@ -564,8 +564,10 @@ class GameManager {
 
     // Player respawned
     socketHandler.on('playerRespawned', (data) => {
+      console.log('[Game] Player respawned event received:', data);
       // Check if local player respawned
       if (data.playerId === socketHandler.getLocalPlayerId() && this.localPlayer) {
+        console.log('[Game] Local player respawning');
         this.localPlayer.spawn(data.position);
         this.uiManager.hideDeathScreen();
       }
