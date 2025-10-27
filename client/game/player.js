@@ -138,6 +138,11 @@ export class LocalPlayer {
    * @param {number} movementY - Mouse movement Y
    */
   handleMouseMove(movementX, movementY) {
+    if (!this._mouseLogShown && (movementX !== 0 || movementY !== 0)) {
+      console.log('[LocalPlayer] Mouse movement detected, pointer lock working');
+      this._mouseLogShown = true;
+    }
+
     this.rotation.yaw -= movementX * this.mouseSensitivity;
     this.rotation.pitch -= movementY * this.mouseSensitivity;
 
