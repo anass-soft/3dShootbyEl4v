@@ -309,7 +309,10 @@ class GameManager {
    * @param {KeyboardEvent} e - Keyboard event
    */
   handleKeyDown(e) {
-    if (!this.localPlayer || !this.isGameActive) return;
+    if (!this.localPlayer || !this.isGameActive) {
+      console.log('[Input] Key pressed but game not active or no local player');
+      return;
+    }
 
     this.keys[e.code] = true;
 
