@@ -1,0 +1,22 @@
+{
+  "name": "3d-shoot-by-el4v",
+  "version": "1.0.0",
+  "description": "Browser-based real-time multiplayer FPS game built with Three.js and Socket.IO",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "keywords": [
+    "fps",
+    "multiplayer",
+    "threejs",
+    "game",
+    "websocket"
+  ],
+  "author": "El4v.Dev",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.0",
+    "socket.io": "^4.6.0"
+  }
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Made By El4v.Dev - Multiplayer FPS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Lobby Screen -->
+  <div id="lobby" class="screen active">
+    <div class="lobby-container">
+      <h1 class="game-title">Made By El4v.Dev</h1>
+
+      <!-- Username Input -->
+      <div class="username-section">
+        <input type="text" id="usernameInput" placeholder="Enter username (3-15 characters)" maxlength="15">
+        <div id="usernameError" class="error-message"></div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-button active" data-tab="create">CREATE</button>
+        <button class="tab-button" data-tab="browse">BROWSE ROOMS</button>
+      </div>
+
+      <!-- Create Tab Content -->
+      <div id="createTab" class="tab-content active">
+        <button id="createRoomBtn" class="btn btn-primary">Create New Room</button>
+      </div>
+
+      <!-- Browse Rooms Tab Content -->
+      <div id="browseTab" class="tab-content">
+        <div id="roomList" class="room-list">
+          <div class="no-rooms">No active rooms. Create one to start!</div>
+        </div>
+      </div>
+
+      <!-- Watermark -->
+      <div class="watermark">Made By El4v.Dev</div>
+    </div>
+  </div>
+
+  <!-- Waiting Room Screen -->
+  <div id="waitingRoom" class="screen">
+    <div class="waiting-room-container">
+      <h2>Waiting Room</h2>
+
+      <div class="room-info">
+        <span id="roomCodeDisplay">Room Code: </span>
+        <span id="playerCountDisplay"></span>
+      </div>
+
+      <div class="player-list-container">
+        <h3>Players</h3>
+        <div id="playerList" class="player-list"></div>
+      </div>
+
+      <div class="ready-section">
+        <button id="readyBtn" class="btn btn-ready">READY UP</button>
+        <button id="leaveRoomBtn" class="btn btn-secondary">LEAVE ROOM</button>
+      </div>
+
+      <div id="statusText" class="status-text">Waiting for players to ready up...</div>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="gameScreen" class="screen">
+    <!-- Three.js Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- HUD Elements -->
+    <div id="hud" class="hud">
+      <!-- Top Left: FPS Counter -->
+      <div id="fpsCounter" class="hud-element hud-top-left">
+        FPS: <span id="fpsValue">60</span>
+      </div>
+
+      <!-- Top Center: Score -->
+      <div id="scoreDisplay" class="hud-element hud-top-center">
+        Score: <span id="scoreValue">0</span> Kills
+      </div>
+
+      <!-- Top Right: Kill Feed -->
+      <div id="killFeed" class="hud-element hud-top-right"></div>
+
+      <!-- Center: Crosshair -->
+      <div id="crosshair" class="crosshair"></div>
+
+      <!-- Bottom Left: Health Bar -->
+      <div id="healthContainer" class="hud-element hud-bottom-left">
+        <div class="health-label">HEALTH</div>
+        <div class="health-bar-container">
+          <div id="healthBar" class="health-bar"></div>
+          <div id="healthText" class="health-text">100 / 100</div>
+        </div>
+      </div>
+
+      <!-- Bottom Center: Weapon Display -->
+      <div id="weaponDisplay" class="hud-element hud-bottom-center">
+        <div id="weaponName" class="weapon-name">AK-47</div>
+        <div class="ammo-display">∞ AMMO</div>
+      </div>
+
+      <!-- Bottom Right: Watermark -->
+      <div class="hud-element hud-bottom-right">
+        <div class="hud-watermark">Made By El4v.Dev</div>
+      </div>
+    </div>
+
+    <!-- Mobile Controls -->
+    <div id="mobileControls" class="mobile-controls hidden">
+      <!-- Movement Joystick -->
+      <div id="joystickArea" class="joystick-area">
+        <div id="joystickOuter" class="joystick-outer">
+          <div id="joystickInner" class="joystick-inner"></div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div id="actionButtons" class="action-buttons">
+        <button id="fireBtn" class="btn-mobile btn-fire">FIRE</button>
+        <button id="jumpBtn" class="btn-mobile btn-jump">JUMP</button>
+        <button id="crouchBtn" class="btn-mobile btn-crouch">CROUCH</button>
+      </div>
+
+      <!-- Weapon Switch Buttons -->
+      <div id="weaponButtons" class="weapon-buttons">
+        <button id="ak47Btn" class="btn-weapon active">AK</button>
+        <button id="sniperBtn" class="btn-weapon">SNPR</button>
+      </div>
+    </div>
+
+    <!-- Death Screen Overlay -->
+    <div id="deathScreen" class="death-screen hidden">
+      <div class="death-message" id="deathMessage">You were killed</div>
+      <div class="respawn-timer" id="respawnTimer">Respawning in 3...</div>
+    </div>
+
+    <!-- Connection Lost Overlay -->
+    <div id="connectionOverlay" class="connection-overlay hidden">
+      <div class="connection-message">Connection lost. Reconnecting...</div>
+    </div>
+
+    <!-- Pointer Lock Overlay -->
+    <div id="pointerLockOverlay" class="pointer-lock-overlay hidden">
+      <div class="pointer-lock-message">Click to resume</div>
+    </div>
+  </div>
+
+  <!-- Socket.IO Client Library (CDN) -->
+  <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+
+  <!-- Three.js Library (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Game Scripts (ES Modules) -->
+  <script type="module" src="main.js"></script>
+</body>
+</html>
