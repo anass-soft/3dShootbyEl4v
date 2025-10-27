@@ -420,9 +420,18 @@ class GameLogic {
   handleGameStart(roomCode) {
     const players = this.playerManager.getPlayersInRoom(roomCode);
 
-    // Spawn all players
+    // Spawn all players and broadcast their spawn positions
     players.forEach(player => {
-      this.playerManager.spawnPlayer(player.id);
+      const spawnPosition = this.playerManager.spawnPlayer(player.id);
+
+      if (spawnPosition) {
+        // Broadcast spawn event to all players in room
+        this.io.to(roomCode).emit('playerRespawned', {
+          playerId: player.id,
+          position: spawnPosition,
+          hp: 100
+        });
+      }
     });
 
     console.log(`[Game Logic] Spawned ${players.length} players for room ${roomCode}`);
