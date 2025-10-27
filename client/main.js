@@ -304,6 +304,7 @@ class GameManager {
     // Pointer lock events
     document.addEventListener('pointerlockchange', () => {
       this.pointerLocked = document.pointerLockElement === this.renderer.domElement;
+      console.log('[Input] Pointer lock changed:', this.pointerLocked);
       this.updatePointerLockOverlay();
     });
   }
