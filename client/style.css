@@ -685,6 +685,249 @@ body {
 }
 
 /**
+ * New Mobile Controls Styles (Dual Joysticks)
+ */
+.mobile-controls-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 160px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 100;
+  gap: 30px;
+  touch-action: none;
+}
+
+.mobile-controls-container.hidden {
+  display: none;
+}
+
+/* Joysticks */
+.joystick {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  touch-action: none;
+  flex-shrink: 0;
+}
+
+.left-joystick {
+  flex-grow: 0;
+}
+
+.right-joystick {
+  flex-grow: 0;
+}
+
+.joystick-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(100, 150, 255, 0.2) 0%, rgba(100, 150, 255, 0.05) 100%);
+}
+
+.joystick-stick {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background: rgba(100, 200, 255, 0.9);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px rgba(100, 200, 255, 0.6), inset -2px -2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.05s;
+}
+
+/* Mobile Buttons */
+.mobile-button {
+  padding: 18px 25px;
+  background: rgba(200, 50, 50, 0.8);
+  border: 2px solid rgba(255, 100, 100, 0.9);
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.1s;
+  touch-action: manipulation;
+  user-select: none;
+  font-size: 14px;
+  flex: 0 0 auto;
+}
+
+.mobile-button:active {
+  background: rgba(255, 100, 100, 1);
+  transform: scale(0.95);
+  box-shadow: 0 0 20px rgba(255, 100, 100, 0.7);
+}
+
+.fire-button {
+  min-width: 110px;
+  background: rgba(200, 50, 50, 0.9);
+  border-color: rgba(255, 150, 150, 0.9);
+  padding: 20px 30px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.crouch-button {
+  min-width: 110px;
+  background: rgba(100, 100, 200, 0.8);
+  border: 2px solid rgba(150, 150, 255, 0.9);
+}
+
+/* Weapon Switch Buttons */
+.weapon-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 101;
+}
+
+.weapon-button {
+  padding: 12px 18px;
+  background: rgba(150, 150, 150, 0.7);
+  border: 2px solid rgba(200, 200, 200, 0.7);
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  touch-action: manipulation;
+  user-select: none;
+  flex: 0 0 auto;
+}
+
+.weapon-button:active {
+  transform: scale(0.95);
+}
+
+.weapon-button.active {
+  background: rgba(100, 200, 100, 0.9);
+  border-color: rgba(150, 255, 150, 0.95);
+  box-shadow: 0 0 15px rgba(100, 200, 100, 0.5);
+}
+
+/* Settings Button */
+.settings-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 55px;
+  height: 55px;
+  background: rgba(100, 100, 100, 0.7);
+  border: 2px solid rgba(150, 150, 150, 0.8);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  z-index: 102;
+  transition: all 0.2s;
+  touch-action: manipulation;
+}
+
+.settings-button:hover {
+  background: rgba(120, 120, 120, 0.9);
+  transform: rotate(20deg);
+}
+
+.settings-button:active {
+  transform: scale(0.9) rotate(20deg);
+}
+
+/* Settings Modal */
+.settings-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.settings-modal.hidden {
+  display: none;
+}
+
+.settings-content {
+  background: rgba(30, 30, 30, 0.98);
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 350px;
+  border: 2px solid rgba(150, 150, 150, 0.6);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+}
+
+.settings-content h2 {
+  margin: 0 0 25px 0;
+  color: #4CAF50;
+  text-align: center;
+  font-size: 24px;
+}
+
+.setting-toggle {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  user-select: none;
+}
+
+.setting-toggle input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: #4CAF50;
+}
+
+.setting-toggle span {
+  flex: 1;
+}
+
+#closeSettings {
+  width: 100%;
+  margin-top: 30px;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#closeSettings:hover {
+  background-color: #45a049;
+}
+
+#closeSettings:active {
+  transform: scale(0.98);
+}
+
+/**
  * Responsive Styles
  */
 @media (max-width: 768px) {
@@ -715,5 +958,26 @@ body {
 
   .hud-top-right {
     max-width: 150px;
+  }
+
+  .mobile-controls-container {
+    height: 170px;
+    padding: 15px;
+    gap: 20px;
+  }
+
+  .joystick {
+    width: 120px;
+    height: 120px;
+  }
+
+  .mobile-button {
+    padding: 15px 20px;
+    font-size: 12px;
+  }
+
+  .settings-content {
+    max-width: 300px;
+    padding: 30px;
   }
 }
