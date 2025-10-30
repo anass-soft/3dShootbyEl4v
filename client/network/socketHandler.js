@@ -220,7 +220,25 @@ class SocketHandler {
    */
   sendPlayerInput(inputData) {
     if (!this.connected || !this.currentRoom) {
+      if (!this._inputWarnLogged) {
+        console.warn('[SocketHandler] Input not sent - not connected or in room', {
+          connected: this.connected,
+          inRoom: !!this.currentRoom
+        });
+        this._inputWarnLogged = true;
+        setTimeout(() => { this._inputWarnLogged = false; }, 2000);
+      }
       return;
+    }
+
+    // Log first few inputs to verify they're being sent
+    if (!this._inputLogCount) this._inputLogCount = 0;
+    if (this._inputLogCount < 3) {
+      console.log('[SocketHandler] Sending input to server:', {
+        movement: inputData.movement,
+        rotation: { yaw: inputData.rotation?.yaw.toFixed(2), pitch: inputData.rotation?.pitch.toFixed(2) }
+      });
+      this._inputLogCount++;
     }
 
     this.socket.emit('playerInput', inputData);

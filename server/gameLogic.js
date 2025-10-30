@@ -87,6 +87,12 @@ class GameLogic {
       // Process each player
       players.forEach(player => {
         if (!player.isAlive) {
+          console.warn('[GameLoop] Skipping dead player in active game', {
+            playerId: player.id,
+            username: player.username,
+            hp: player.hp,
+            roomCode: roomCode
+          });
           return;
         }
 
@@ -185,7 +191,18 @@ class GameLogic {
   processShot(shooterId, shotData) {
     const shooter = this.playerManager.getPlayer(shooterId);
 
-    if (!shooter || !shooter.isAlive) {
+    if (!shooter) {
+      console.warn('[GameLogic] Shot from unknown shooter:', shooterId);
+      return null;
+    }
+
+    if (!shooter.isAlive) {
+      console.warn('[GameLogic] Shot ignored - shooter not alive', {
+        shooterId: shooterId,
+        shooterName: shooter.username,
+        shooterHP: shooter.hp,
+        shooterAlive: shooter.isAlive
+      });
       return null;
     }
 

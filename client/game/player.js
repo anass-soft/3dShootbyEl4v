@@ -55,7 +55,18 @@ export class LocalPlayer {
    */
   update(deltaTime) {
     if (!this.isAlive) {
-      console.warn('[LocalPlayer] Update called but player is not alive');
+      if (!this._deadWarnLogged) {
+        console.error('[LocalPlayer] CRITICAL: update() called but isAlive=false', {
+          playerId: this.playerId,
+          isAlive: this.isAlive,
+          hp: this.hp,
+          position: this.position,
+          hasInputState: !!this.inputState
+        });
+        this._deadWarnLogged = true;
+        // Log again after 2s if still dead
+        setTimeout(() => { this._deadWarnLogged = false; }, 2000);
+      }
       return;
     }
 

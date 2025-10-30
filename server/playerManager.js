@@ -102,6 +102,17 @@ class PlayerManager {
   updatePlayerInput(socketId, inputData) {
     const player = this.players.get(socketId);
     if (!player || !player.isAlive) {
+      if (!player) {
+        console.warn('[PlayerManager] Input from unknown player:', socketId);
+      } else {
+        console.warn('[PlayerManager] Input ignored - player not alive:', {
+          playerId: socketId,
+          username: player.username,
+          isAlive: player.isAlive,
+          hp: player.hp,
+          hasMovement: !!inputData.movement
+        });
+      }
       return;
     }
 
