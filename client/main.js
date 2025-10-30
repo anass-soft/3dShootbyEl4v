@@ -63,6 +63,9 @@ class GameManager {
     // Initialize Three.js (but don't show yet)
     this.initThreeJS();
 
+    // Setup UI handlers (settings, etc)
+    this.setupUIHandlers();
+
     // Setup socket event handlers
     this.setupSocketHandlers();
 
