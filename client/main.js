@@ -250,8 +250,8 @@ class GameManager {
     this.uiManager = new UIManager(this.localPlayer);
     this.hitMarker = new HitMarker();
 
-    // Initialize mobile controls if on mobile
-    this.mobileControls = new MobileControls(this.localPlayer, this.weaponManager);
+    // Initialize mobile controls manager
+    this.mobileControlsManager = new MobileControlsManager(this.localPlayer, this.weaponManager, socketHandler);
 
     // Setup input handlers
     this.setupInputHandlers();
