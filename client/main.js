@@ -8,7 +8,8 @@ import socketHandler from './network/socketHandler.js';
 import { generateMap, setupLighting, setupEnvironment } from './game/map.js';
 import { LocalPlayer, OtherPlayersManager } from './game/player.js';
 import { WeaponManager, HitMarker } from './game/weapon.js';
-import { UIManager, MobileControls } from './game/ui.js';
+import { UIManager } from './game/ui.js';
+import { MobileControlsManager } from './game/mobileControls.js';
 
 /**
  * Game Manager Class
@@ -34,6 +35,7 @@ class GameManager {
     this.weaponManager = null;
     this.uiManager = null;
     this.mobileControls = null;
+    this.mobileControlsManager = null;
     this.hitMarker = null;
 
     // Input state
@@ -60,6 +62,9 @@ class GameManager {
 
     // Initialize Three.js (but don't show yet)
     this.initThreeJS();
+
+    // Setup UI handlers (settings, etc)
+    this.setupUIHandlers();
 
     // Setup socket event handlers
     this.setupSocketHandlers();
@@ -248,8 +253,8 @@ class GameManager {
     this.uiManager = new UIManager(this.localPlayer);
     this.hitMarker = new HitMarker();
 
-    // Initialize mobile controls if on mobile
-    this.mobileControls = new MobileControls(this.localPlayer, this.weaponManager);
+    // Initialize mobile controls manager
+    this.mobileControlsManager = new MobileControlsManager(this.localPlayer, this.weaponManager, socketHandler);
 
     // Setup input handlers
     this.setupInputHandlers();
@@ -435,6 +440,11 @@ class GameManager {
       this.weaponManager.update(deltaTime);
     }
 
+    // Update mobile controls
+    if (this.mobileControlsManager && this.mobileControlsManager.isEnabled()) {
+      this.mobileControlsManager.update(deltaTime);
+    }
+
     // Interpolate other players
     if (this.otherPlayers) {
       this.otherPlayers.interpolate(deltaTime);
@@ -465,6 +475,39 @@ class GameManager {
     if (!this.localPlayer) return;
 
     socketHandler.sendPlayerInput(this.localPlayer.getInputState());
+  }
+
+  /**
+   * Setup UI event handlers for settings
+   */
+  setupUIHandlers() {
+    // Settings button
+    const settingsButton = document.getElementById('settingsButton');
+    const settingsModal = document.getElementById('settingsModal');
+    const closeSettings = document.getElementById('closeSettings');
+
+    if (settingsButton && settingsModal) {
+      // Open settings modal
+      settingsButton.addEventListener('click', () => {
+        settingsModal.classList.remove('hidden');
+      });
+
+      // Close settings modal
+      if (closeSettings) {
+        closeSettings.addEventListener('click', () => {
+          settingsModal.classList.add('hidden');
+        });
+      }
+
+      // Close on background click
+      settingsModal.addEventListener('click', (e) => {
+        if (e.target === settingsModal) {
+          settingsModal.classList.add('hidden');
+        }
+      });
+    }
+
+    console.log('[Game] UI handlers set up');
   }
 
   /**
