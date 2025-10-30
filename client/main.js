@@ -8,7 +8,8 @@ import socketHandler from './network/socketHandler.js';
 import { generateMap, setupLighting, setupEnvironment } from './game/map.js';
 import { LocalPlayer, OtherPlayersManager } from './game/player.js';
 import { WeaponManager, HitMarker } from './game/weapon.js';
-import { UIManager, MobileControls } from './game/ui.js';
+import { UIManager } from './game/ui.js';
+import { MobileControlsManager } from './game/mobileControls.js';
 
 /**
  * Game Manager Class
