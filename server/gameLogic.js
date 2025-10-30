@@ -87,6 +87,12 @@ class GameLogic {
       // Process each player
       players.forEach(player => {
         if (!player.isAlive) {
+          console.warn('[GameLoop] Skipping dead player in active game', {
+            playerId: player.id,
+            username: player.username,
+            hp: player.hp,
+            roomCode: roomCode
+          });
           return;
         }
 
