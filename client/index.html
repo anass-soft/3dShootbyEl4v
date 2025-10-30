@@ -110,26 +110,55 @@
       </div>
     </div>
 
-    <!-- Mobile Controls -->
-    <div id="mobileControls" class="mobile-controls hidden">
-      <!-- Movement Joystick -->
-      <div id="joystickArea" class="joystick-area">
-        <div id="joystickOuter" class="joystick-outer">
-          <div id="joystickInner" class="joystick-inner"></div>
-        </div>
+    <!-- Settings Button -->
+    <div id="settingsButton" class="settings-button">
+      <span>⚙️</span>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="settings-modal hidden">
+      <div class="settings-content">
+        <h2>Settings</h2>
+        <label class="setting-toggle">
+          <input type="checkbox" id="mobileControlsToggle">
+          <span>Enable Mobile Controls</span>
+        </label>
+        <button id="closeSettings" class="btn">Close</button>
+      </div>
+    </div>
+
+    <!-- Mobile Controls Container -->
+    <div id="mobileControlsContainer" class="mobile-controls-container hidden">
+      <!-- Left Joystick (Movement) -->
+      <div id="leftJoystick" class="joystick left-joystick">
+        <div class="joystick-bg"></div>
+        <div class="joystick-stick"></div>
       </div>
 
-      <!-- Action Buttons -->
-      <div id="actionButtons" class="action-buttons">
-        <button id="fireBtn" class="btn-mobile btn-fire">FIRE</button>
-        <button id="jumpBtn" class="btn-mobile btn-jump">JUMP</button>
-        <button id="crouchBtn" class="btn-mobile btn-crouch">CROUCH</button>
+      <!-- Right Joystick (Camera Rotation) -->
+      <div id="rightJoystick" class="joystick right-joystick">
+        <div class="joystick-bg"></div>
+        <div class="joystick-stick"></div>
       </div>
+
+      <!-- Fire Button -->
+      <button id="fireButton" class="mobile-button fire-button">
+        <span>FIRE</span>
+      </button>
+
+      <!-- Crouch Button -->
+      <button id="crouchButton" class="mobile-button crouch-button">
+        <span>CROUCH</span>
+      </button>
 
       <!-- Weapon Switch Buttons -->
-      <div id="weaponButtons" class="weapon-buttons">
-        <button id="ak47Btn" class="btn-weapon active">AK</button>
-        <button id="sniperBtn" class="btn-weapon">SNPR</button>
+      <div class="weapon-switch">
+        <button id="weapon1Button" class="weapon-button active" data-weapon="ak47">
+          <span>AK-47</span>
+        </button>
+        <button id="weapon2Button" class="weapon-button" data-weapon="sniper">
+          <span>SNIPER</span>
+        </button>
       </div>
     </div>
 
