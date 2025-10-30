@@ -475,6 +475,39 @@ class GameManager {
   }
 
   /**
+   * Setup UI event handlers for settings
+   */
+  setupUIHandlers() {
+    // Settings button
+    const settingsButton = document.getElementById('settingsButton');
+    const settingsModal = document.getElementById('settingsModal');
+    const closeSettings = document.getElementById('closeSettings');
+
+    if (settingsButton && settingsModal) {
+      // Open settings modal
+      settingsButton.addEventListener('click', () => {
+        settingsModal.classList.remove('hidden');
+      });
+
+      // Close settings modal
+      if (closeSettings) {
+        closeSettings.addEventListener('click', () => {
+          settingsModal.classList.add('hidden');
+        });
+      }
+
+      // Close on background click
+      settingsModal.addEventListener('click', (e) => {
+        if (e.target === settingsModal) {
+          settingsModal.classList.add('hidden');
+        }
+      });
+    }
+
+    console.log('[Game] UI handlers set up');
+  }
+
+  /**
    * Setup socket event handlers
    */
   setupSocketHandlers() {
