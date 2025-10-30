@@ -35,6 +35,7 @@ class GameManager {
     this.weaponManager = null;
     this.uiManager = null;
     this.mobileControls = null;
+    this.mobileControlsManager = null;
     this.hitMarker = null;
 
     // Input state
