@@ -437,6 +437,11 @@ class GameManager {
       this.weaponManager.update(deltaTime);
     }
 
+    // Update mobile controls
+    if (this.mobileControlsManager && this.mobileControlsManager.isEnabled()) {
+      this.mobileControlsManager.update(deltaTime);
+    }
+
     // Interpolate other players
     if (this.otherPlayers) {
       this.otherPlayers.interpolate(deltaTime);
