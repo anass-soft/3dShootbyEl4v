@@ -590,9 +590,24 @@ class GameManager {
       console.log('[Game] Player respawned event received:', data);
       // Check if local player respawned
       if (data.playerId === socketHandler.getLocalPlayerId() && this.localPlayer) {
-        console.log('[Game] Local player respawning');
+        console.log('[Game] Spawning local player at:', data.position);
+
+        // CRITICAL: Set alive FIRST before calling spawn()
+        this.localPlayer.isAlive = true;
         this.localPlayer.spawn(data.position);
+
+        // Verify state was set
+        console.log('[Game] After spawn - isAlive:', this.localPlayer.isAlive);
+
         this.uiManager.hideDeathScreen();
+      } else if (data.playerId && this.otherPlayers) {
+        // Update other player - also mark as alive
+        this.otherPlayers.updatePlayer({
+          id: data.playerId,
+          position: data.position,
+          isAlive: true,
+          hp: data.hp || 100
+        });
       }
     });
 
